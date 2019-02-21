@@ -1,0 +1,33 @@
+{
+    "name": "chainside/webpos-sdk",
+    "description": "SDKs for WebPos integration for ChainsidePay",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Chainside SRL",
+            "email": "info@chainside.net"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "moveaxlab/sdk-boilerplate": "^2.0",
+        "illuminate/cache": "~5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chainside\\SDK\\WebPos\\": "src/",
+            "Chainside\\SDK\\WebPos\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Chainside\\SDK\\WebPos\\Laravel\\ChainsideWebPosSdkServiceProvider"
+            ],
+            "aliases": {
+                "ChainsideWebPosClient": "Chainside\\SDK\\WebPos\\Laravel\\Facades\\Client",
+                "ChainsideWebPosCallbackHandler": "Chainside\\SDK\\WebPos\\Laravel\\Facades\\CallbackHandler"
+            }
+        }
+    }
+}

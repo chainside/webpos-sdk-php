@@ -1,0 +1,5 @@
+/vendor/
+/.idea/
+__pycache__
+composer.lock
+test.php

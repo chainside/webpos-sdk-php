@@ -10,8 +10,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "moveaxlab/sdk-boilerplate": "^2.0",
-        "illuminate/cache": "~5.3"
+        "moveaxlab/sdk-boilerplate": "^1.0",
+        "illuminate/cache": "5.2.*"
     },
     "autoload": {
         "psr-4": {

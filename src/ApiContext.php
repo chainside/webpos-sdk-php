@@ -14,8 +14,8 @@ class ApiContext extends Context
 {
 
     protected $hostnames = [
-        'live' => 'https://api.chainside.net',
-        'sandbox' => 'https://api.sandbox.chainside.net',
+        'live' => 'https://api.webpos.chainside.net',
+        'sandbox' => 'https://api.sandbox.webpos.chainside.net',
     ];
 
     protected $defaultConfig = [

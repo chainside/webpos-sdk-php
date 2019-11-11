@@ -22,7 +22,7 @@ class Out extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"amount": {"rules": ["required"], "type": "integer"}, "n": {"rules": ["required"], "type": "integer"}}, "rules": [], "type": "object"}');
+        return Spec::fromJson('{"rules": [], "schema": {"amount": {"rules": ["required"], "type": "integer"}, "n": {"rules": ["required"], "type": "integer"}}, "type": "object"}');
     }
 
 }

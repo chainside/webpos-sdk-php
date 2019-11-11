@@ -16,11 +16,20 @@ abstract class ChainsideServerException extends ChainsideSdkException implements
     protected $request;
     protected $response;
 
+    /**
+     * @var string | null
+     */
+    protected $requestId;
+
     public function __construct(Request $request, Response $response)
     {
 
         $this->request = $request;
         $this->response = $response;
+
+        if(isset($this->response->body()['request_id'])) {
+            $this->requestId  = $this->response->body()['request_id'];
+        }
 
         parent::__construct($this->exceptionMessage(), intval(static::errorCode()));
     }
@@ -53,6 +62,10 @@ abstract class ChainsideServerException extends ChainsideSdkException implements
     public function getRequest()
     {
         return $this->request;
+    }
+
+    public function getRequestId() {
+        return $this->requestId;
     }
 
 

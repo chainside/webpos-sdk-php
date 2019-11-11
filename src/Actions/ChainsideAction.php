@@ -3,11 +3,11 @@
 namespace Chainside\SDK\WebPos\Actions;
 
 
+use Chainside\SDK\WebPos\Exceptions\ChainsideSdkException;
 use SDK\Boilerplate\Action;
 use SDK\Boilerplate\Context;
 use Chainside\SDK\WebPos\Exceptions\UnknownError;
 use SDK\Boilerplate\Contracts\Response as IResponse;
-use Chainside\SDK\WebPos\Exceptions\ChainsideServerException;
 use Chainside\SDK\WebPos\Exceptions\Factory\ChainsideExceptionFactory;
 
 abstract class ChainsideAction extends Action
@@ -51,7 +51,7 @@ abstract class ChainsideAction extends Action
 
     /**
      * @param string $errorCode
-     * @return ChainsideServerException
+     * @return ChainsideSdkException
      */
     protected function getException($errorCode)
     {

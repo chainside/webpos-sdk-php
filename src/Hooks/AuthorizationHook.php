@@ -4,7 +4,6 @@ namespace Chainside\SDK\WebPos\Hooks;
 
 
 use SDK\Boilerplate\Hooks\PreSendHook;
-use SDK\Boilerplate\RunState;
 
 class AuthorizationHook extends PreSendHook
 {

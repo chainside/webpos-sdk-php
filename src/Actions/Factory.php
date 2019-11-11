@@ -29,8 +29,11 @@ class Factory extends ActionFactory
             "client_credentials_login" => ClientCredentialsLogin::class,
             "delete_payment_order" => DeletePaymentOrder::class,
             "get_payment_order" => GetPaymentOrder::class,
-            "get_web_pos_payments" => GetWebPosPayments::class,
+            "get_payment_orders" => GetPaymentOrders::class,
             "create_payment_order" => CreatePaymentOrder::class,
+            "get_callbacks" => GetCallbacks::class,
+            "payment_reset" => PaymentReset::class,
+            "payment_update" => PaymentUpdate::class,
             
         ];
 

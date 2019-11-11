@@ -10,9 +10,9 @@ use ElevenLab\Validation\Spec;
  *
  * Currency Data
  *
- * @property string $uuid UUID of the currency
  * @property string $name Name of the currency
  * @property string $type Currency's type (fiat/crypto)
+ * @property string $uuid UUID of the currency
  *
  */
 class CurrencyRetrieval extends SdkObject
@@ -23,7 +23,7 @@ class CurrencyRetrieval extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"uuid": {"rules": ["required"], "type": "uuid"}, "name": {"rules": ["required"], "type": "string"}, "type": {"rules": ["in:crypto,fiat", "required"], "type": "string"}}, "rules": [], "type": "object"}');
+        return Spec::fromJson('{"rules": [], "schema": {"name": {"rules": ["required"], "type": "string"}, "type": {"rules": ["in:crypto,fiat", "required"], "type": "string"}, "uuid": {"rules": ["required"], "type": "uuid"}}, "type": "object"}');
     }
 
 }

@@ -10,8 +10,8 @@ use ElevenLab\Validation\Spec;
  *
  * Data required to perform a confidential client login
  *
- * @property string $scope Oauth2 scope of the client's authorization
  * @property string $grant_type Oauth2 Authorization's grant type
+ * @property string $scope Oauth2 scope of the client's authorization
  *
  */
 class ClientCredentials extends SdkObject
@@ -22,7 +22,7 @@ class ClientCredentials extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"scope": {"rules": ["in:*", "required"], "type": "string"}, "grant_type": {"rules": ["equals:client_credentials", "required"], "type": "string"}}, "rules": [], "type": "object"}');
+        return Spec::fromJson('{"rules": [], "schema": {"grant_type": {"rules": ["equals:client_credentials", "required"], "type": "string"}, "scope": {"rules": ["in:*", "required"], "type": "string"}}, "type": "object"}');
     }
 
 }

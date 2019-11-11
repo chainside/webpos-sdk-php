@@ -9,10 +9,10 @@ use ElevenLab\Validation\Spec;
  * PaymentOverpaidCallback
  *
  *
- * @property CallbackPaymentOrder $object 
- * @property string $object_type Type of the object sent in the callback
- * @property string $created_at 
  * @property string $event Event which triggered the callback
+ * @property string $created_at Date in which the callback was sent
+ * @property string $object_type Type of the object sent in the callback
+ * @property CallbackPaymentOrder $object 
  *
  */
 class PaymentOverpaidCallback extends SdkObject
@@ -31,7 +31,6 @@ class PaymentOverpaidCallback extends SdkObject
                 ],
                 "schema": {
                     "created_at": {
-                        "descritpion": "Date in which the callback was sent",
                         "rules": [
                             "required"
                         ],
@@ -105,6 +104,10 @@ class PaymentOverpaidCallback extends SdkObject
                                     "required"
                                 ],
                                 "schema": {
+                                    "active": {
+                                        "rules": [],
+                                        "type": "boolean"
+                                    },
                                     "deposit_account": {
                                         "rules": [
                                             "required"
@@ -141,7 +144,7 @@ class PaymentOverpaidCallback extends SdkObject
                                     "type": {
                                         "rules": [
                                             "required",
-                                            "in:web"
+                                            "in:web,mobile"
                                         ],
                                         "type": "string"
                                     },
@@ -218,10 +221,18 @@ class PaymentOverpaidCallback extends SdkObject
                                         ],
                                         "type": "ISO_8601_date"
                                     },
+                                    "from": {
+                                        "rules": [],
+                                        "type": "string"
+                                    },
                                     "source": {
                                         "rules": [
                                             "required"
                                         ],
+                                        "type": "string"
+                                    },
+                                    "to": {
+                                        "rules": [],
                                         "type": "string"
                                     },
                                     "value": {
@@ -275,8 +286,8 @@ class PaymentOverpaidCallback extends SdkObject
                                     },
                                     "in_confirmation": {
                                         "rules": [
-                                            "required",
-                                            "nullable"
+                                            "nullable",
+                                            "required"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -297,8 +308,8 @@ class PaymentOverpaidCallback extends SdkObject
                                     },
                                     "paid": {
                                         "rules": [
-                                            "required",
-                                            "nullable"
+                                            "nullable",
+                                            "required"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -326,8 +337,8 @@ class PaymentOverpaidCallback extends SdkObject
                                     },
                                     "unpaid": {
                                         "rules": [
-                                            "required",
-                                            "nullable"
+                                            "nullable",
+                                            "required"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -421,8 +432,8 @@ class PaymentOverpaidCallback extends SdkObject
                                     "type": "object"
                                 },
                                 "rules": [
-                                    "required",
-                                    "nullable"
+                                    "nullable",
+                                    "required"
                                 ],
                                 "type": "array"
                             },

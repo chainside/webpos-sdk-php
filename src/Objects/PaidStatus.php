@@ -10,8 +10,8 @@ use ElevenLab\Validation\Spec;
  *
  * Cryto and fiat paid amounts
  *
- * @property string $fiat Fiat Amount
  * @property integer $crypto Cryto Amount
+ * @property string $fiat Fiat Amount
  *
  */
 class PaidStatus extends SdkObject
@@ -22,7 +22,7 @@ class PaidStatus extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"fiat": {"rules": ["required", "decimal"], "type": "string"}, "crypto": {"rules": ["required"], "type": "integer"}}, "rules": [], "type": "object"}');
+        return Spec::fromJson('{"rules": [], "schema": {"crypto": {"rules": ["required"], "type": "integer"}, "fiat": {"rules": ["required", "decimal"], "type": "string"}}, "type": "object"}');
     }
 
 }

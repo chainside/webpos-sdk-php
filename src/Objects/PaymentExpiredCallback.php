@@ -9,10 +9,10 @@ use ElevenLab\Validation\Spec;
  * PaymentExpiredCallback
  *
  *
+ * @property string $event Event which triggered the callback
+ * @property string $created_at Date in which the callback was sent
  * @property CallbackPaymentOrder $object 
  * @property string $object_type Type of the object sent in the callback
- * @property string $created_at Date in which the callback was sent
- * @property string $event Event which triggered the callback
  *
  */
 class PaymentExpiredCallback extends SdkObject
@@ -48,9 +48,10 @@ class PaymentExpiredCallback extends SdkObject
                         "schema": {
                             "address": {
                                 "rules": [
+                                    "regex:^(bc1|[13]|tb1|[2nm]|bcrt)[a-zA-HJ-NP-Z0-9]{25,40}$",
                                     "required"
                                 ],
-                                "type": "base58"
+                                "type": "string"
                             },
                             "amount": {
                                 "rules": [
@@ -104,6 +105,10 @@ class PaymentExpiredCallback extends SdkObject
                                     "required"
                                 ],
                                 "schema": {
+                                    "active": {
+                                        "rules": [],
+                                        "type": "boolean"
+                                    },
                                     "deposit_account": {
                                         "rules": [
                                             "required"
@@ -140,7 +145,7 @@ class PaymentExpiredCallback extends SdkObject
                                     "type": {
                                         "rules": [
                                             "required",
-                                            "in:web"
+                                            "in:web,mobile"
                                         ],
                                         "type": "string"
                                     },
@@ -217,10 +222,18 @@ class PaymentExpiredCallback extends SdkObject
                                         ],
                                         "type": "ISO_8601_date"
                                     },
+                                    "from": {
+                                        "rules": [],
+                                        "type": "string"
+                                    },
                                     "source": {
                                         "rules": [
                                             "required"
                                         ],
+                                        "type": "string"
+                                    },
+                                    "to": {
+                                        "rules": [],
                                         "type": "string"
                                     },
                                     "value": {
@@ -274,8 +287,8 @@ class PaymentExpiredCallback extends SdkObject
                                     },
                                     "in_confirmation": {
                                         "rules": [
-                                            "required",
-                                            "nullable"
+                                            "nullable",
+                                            "required"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -296,8 +309,8 @@ class PaymentExpiredCallback extends SdkObject
                                     },
                                     "paid": {
                                         "rules": [
-                                            "required",
-                                            "nullable"
+                                            "nullable",
+                                            "required"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -325,8 +338,8 @@ class PaymentExpiredCallback extends SdkObject
                                     },
                                     "unpaid": {
                                         "rules": [
-                                            "required",
-                                            "nullable"
+                                            "nullable",
+                                            "required"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -420,8 +433,8 @@ class PaymentExpiredCallback extends SdkObject
                                     "type": "object"
                                 },
                                 "rules": [
-                                    "required",
-                                    "nullable"
+                                    "nullable",
+                                    "required"
                                 ],
                                 "type": "array"
                             },

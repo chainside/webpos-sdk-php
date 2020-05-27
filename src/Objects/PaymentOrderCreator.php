@@ -10,10 +10,10 @@ use ElevenLab\Validation\Spec;
  *
  * Data of payment order's creator
  *
+ * @property string $name Payment order creator's name
  * @property string $uuid Payment order creator's uuid
  * @property DepositAccountLite $deposit_account Deposit account associated to the payment order's creator
  * @property string $type Payment order creator's type
- * @property string $name Payment order creator's name
  *
  */
 class PaymentOrderCreator extends SdkObject
@@ -25,7 +25,7 @@ class PaymentOrderCreator extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"uuid": {"rules": ["required"], "type": "uuid"}, "deposit_account": {"schema": {"uuid": {"rules": ["required"], "type": "uuid"}, "name": {"rules": ["required"], "type": "string"}, "type": {"rules": ["in:bank,bitcoin", "required"], "type": "string"}}, "rules": ["required"], "type": "object"}, "type": {"rules": ["required", "in:web"], "type": "string"}, "name": {"rules": ["required"], "type": "string"}}, "rules": [], "type": "object"}');
+        return Spec::fromJson('{"type": "object", "rules": [], "schema": {"name": {"type": "string", "rules": ["required"]}, "uuid": {"type": "uuid", "rules": ["required"]}, "deposit_account": {"type": "object", "rules": ["required"], "schema": {"name": {"type": "string", "rules": ["required"]}, "uuid": {"type": "uuid", "rules": ["required"]}, "type": {"type": "string", "rules": ["in:bank,bitcoin", "required"]}}}, "type": {"type": "string", "rules": ["required", "in:web"]}}}');
     }
 
 }

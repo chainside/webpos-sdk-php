@@ -10,8 +10,8 @@ use ElevenLab\Validation\Spec;
  *
  * Rate Data
  *
- * @property string $value Value of the rate
  * @property string $source Exchange providing the rate
+ * @property string $value Value of the rate
  * @property string $created_at Creation's date of the rate
  *
  */
@@ -23,7 +23,7 @@ class RateRetrieval extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"value": {"rules": ["decimal", "required"], "type": "string"}, "source": {"rules": ["required"], "type": "string"}, "created_at": {"rules": ["required"], "type": "ISO_8601_date"}}, "rules": [], "type": "object"}');
+        return Spec::fromJson('{"type": "object", "rules": [], "schema": {"source": {"type": "string", "rules": ["required"]}, "value": {"type": "string", "rules": ["decimal", "required"]}, "created_at": {"type": "ISO_8601_date", "rules": ["required"]}}}');
     }
 
 }

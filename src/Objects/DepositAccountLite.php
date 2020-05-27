@@ -10,8 +10,8 @@ use ElevenLab\Validation\Spec;
  *
  * Deposit account lite object when sent nested in other api objects
  *
- * @property string $uuid Deposit account's uuid
  * @property string $name Deposit account's name
+ * @property string $uuid Deposit account's uuid
  * @property string $type Deposit account's type
  *
  */
@@ -23,7 +23,7 @@ class DepositAccountLite extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"uuid": {"rules": ["required"], "type": "uuid"}, "name": {"rules": ["required"], "type": "string"}, "type": {"rules": ["in:bank,bitcoin", "required"], "type": "string"}}, "rules": [], "type": "object"}');
+        return Spec::fromJson('{"type": "object", "rules": [], "schema": {"name": {"type": "string", "rules": ["required"]}, "uuid": {"type": "uuid", "rules": ["required"]}, "type": {"type": "string", "rules": ["in:bank,bitcoin", "required"]}}}');
     }
 
 }

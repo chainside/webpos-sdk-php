@@ -31,27 +31,11 @@ class GetPaymentOrders extends WebPosAuthenticatedAction
 
     /**
     *
-    * @param string $status
+    * @param integer $pageSize
     * @return $this
     */
-    public function setStatus($status) {
-        $this->addQueryParameter('status', $status);
-        return $this;
-    }/**
-    *
-    * @param string $sortBy
-    * @return $this
-    */
-    public function setSortBy($sortBy) {
-        $this->addQueryParameter('sort_by', $sortBy);
-        return $this;
-    }/**
-    *
-    * @param string $sortOrder
-    * @return $this
-    */
-    public function setSortOrder($sortOrder) {
-        $this->addQueryParameter('sort_order', $sortOrder);
+    public function setPageSize($pageSize) {
+        $this->addQueryParameter('page_size', $pageSize);
         return $this;
     }/**
     *
@@ -63,11 +47,27 @@ class GetPaymentOrders extends WebPosAuthenticatedAction
         return $this;
     }/**
     *
-    * @param integer $pageSize
+    * @param string $sortOrder
     * @return $this
     */
-    public function setPageSize($pageSize) {
-        $this->addQueryParameter('page_size', $pageSize);
+    public function setSortOrder($sortOrder) {
+        $this->addQueryParameter('sort_order', $sortOrder);
+        return $this;
+    }/**
+    *
+    * @param string $sortBy
+    * @return $this
+    */
+    public function setSortBy($sortBy) {
+        $this->addQueryParameter('sort_by', $sortBy);
+        return $this;
+    }/**
+    *
+    * @param string $status
+    * @return $this
+    */
+    public function setStatus($status) {
+        $this->addQueryParameter('status', $status);
         return $this;
     }
 

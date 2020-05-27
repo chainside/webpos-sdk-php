@@ -48,9 +48,10 @@ class PaymentCancelledCallback extends SdkObject
                         "schema": {
                             "address": {
                                 "rules": [
+                                    "regex:^(bc1|[13]|tb1|[2nm]|bcrt)[a-zA-HJ-NP-Z0-9]{25,40}$",
                                     "required"
                                 ],
-                                "type": "base58"
+                                "type": "string"
                             },
                             "amount": {
                                 "rules": [
@@ -286,8 +287,8 @@ class PaymentCancelledCallback extends SdkObject
                                     },
                                     "in_confirmation": {
                                         "rules": [
-                                            "nullable",
-                                            "required"
+                                            "required",
+                                            "nullable"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -308,8 +309,8 @@ class PaymentCancelledCallback extends SdkObject
                                     },
                                     "paid": {
                                         "rules": [
-                                            "nullable",
-                                            "required"
+                                            "required",
+                                            "nullable"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -337,8 +338,8 @@ class PaymentCancelledCallback extends SdkObject
                                     },
                                     "unpaid": {
                                         "rules": [
-                                            "nullable",
-                                            "required"
+                                            "required",
+                                            "nullable"
                                         ],
                                         "schema": {
                                             "crypto": {
@@ -432,8 +433,8 @@ class PaymentCancelledCallback extends SdkObject
                                     "type": "object"
                                 },
                                 "rules": [
-                                    "nullable",
-                                    "required"
+                                    "required",
+                                    "nullable"
                                 ],
                                 "type": "array"
                             },

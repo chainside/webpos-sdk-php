@@ -21,7 +21,7 @@ class PaymentUpdateUrlParams extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"type": "object", "rules": ["nullable"], "schema": {"payment_order_uuid": {"type": "uuid", "rules": ["required"]}}}');
+        return Spec::fromJson('{"schema": {"payment_order_uuid": {"type": "uuid", "rules": ["required"]}}, "type": "object", "rules": ["nullable"]}');
     }
 
 }

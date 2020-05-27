@@ -10,13 +10,13 @@ use ElevenLab\Validation\Spec;
  *
  * Data required to create a new payment order
  *
- * @property string $amount Payment order's fiat amount
- * @property string $cancel_url The URL where the user is redirected upon successful payment order expiration/cancellation
  * @property string $continue_url The URL where the user is redirected upon successful payment
- * @property string $callback_url The URL contacted to send callbacks related to payment status changes
- * @property string $details Payment order's details
  * @property string $reference Business' reference of the payment order
+ * @property string $cancel_url The URL where the user is redirected upon successful payment order expiration/cancellation
+ * @property string $callback_url The URL contacted to send callbacks related to payment status changes
  * @property integer $required_confirmations Required confirmations for transactions paying the payment order
+ * @property string $details Payment order's details
+ * @property string $amount Payment order's fiat amount
  *
  */
 class PaymentOrderCreation extends SdkObject
@@ -27,7 +27,7 @@ class PaymentOrderCreation extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"rules": [], "schema": {"amount": {"rules": ["required", "decimal"], "type": "string"}, "cancel_url": {"rules": ["regex[https_url]:^https://", "nullable", "maxlen:300"], "type": "url"}, "continue_url": {"rules": ["regex[https_url]:^https://", "nullable", "maxlen:300"], "type": "url"}, "callback_url": {"rules": ["regex[https_url]:^https://", "nullable", "maxlen:300"], "type": "url"}, "details": {"rules": ["maxlen:300", "nullable"], "type": "string"}, "reference": {"rules": ["maxlen:300", "nullable"], "type": "string"}, "required_confirmations": {"rules": ["min:0", "nullable"], "type": "integer"}}, "type": "object"}');
+        return Spec::fromJson('{"schema": {"continue_url": {"type": "url", "rules": ["regex[https_url]:^https://", "nullable", "maxlen:300"]}, "reference": {"type": "string", "rules": ["maxlen:300", "nullable"]}, "cancel_url": {"type": "url", "rules": ["regex[https_url]:^https://", "nullable", "maxlen:300"]}, "callback_url": {"type": "url", "rules": ["regex[https_url]:^https://", "nullable", "maxlen:300"]}, "required_confirmations": {"type": "integer", "rules": ["min:0", "nullable"]}, "details": {"type": "string", "rules": ["maxlen:300", "nullable"]}, "amount": {"type": "string", "rules": ["required", "decimal"]}}, "type": "object", "rules": []}');
     }
 
 }

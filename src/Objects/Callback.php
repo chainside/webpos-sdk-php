@@ -21,7 +21,7 @@ class Callback extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"rules": [], "schema": {"name": {"type": "string", "rules": ["required"]}}, "type": "object"}');
+        return Spec::fromJson('{"schema": {"name": {"type": "string", "rules": ["required"]}}, "type": "object", "rules": []}');
     }
 
 }

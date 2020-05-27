@@ -10,8 +10,8 @@ use ElevenLab\Validation\Spec;
  *
  * Transaction's output
  *
- * @property integer $amount Output's amount
  * @property integer $n Transaction output's index
+ * @property integer $amount Output's amount
  *
  */
 class Out extends SdkObject
@@ -22,7 +22,7 @@ class Out extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"rules": [], "schema": {"amount": {"rules": ["required"], "type": "integer"}, "n": {"rules": ["required"], "type": "integer"}}, "type": "object"}');
+        return Spec::fromJson('{"schema": {"n": {"type": "integer", "rules": ["required"]}, "amount": {"type": "integer", "rules": ["required"]}}, "type": "object", "rules": []}');
     }
 
 }

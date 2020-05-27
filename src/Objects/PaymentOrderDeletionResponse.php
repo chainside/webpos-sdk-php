@@ -21,7 +21,7 @@ class PaymentOrderDeletionResponse extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"cancel_url": {"rules": ["regex[https_url]:^https://", "required"], "type": "url"}}, "rules": [], "type": "object"}');
+        return Spec::fromJson('{"type": "object", "rules": [], "schema": {"cancel_url": {"type": "url", "rules": ["regex[https_url]:^https://", "required"]}}}');
     }
 
 }

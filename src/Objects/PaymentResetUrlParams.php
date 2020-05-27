@@ -6,14 +6,14 @@ use SDK\Boilerplate\SdkObject;
 use ElevenLab\Validation\Spec;
 
 /**
- * DeletePaymentOrderUrlParams Object
+ * PaymentResetUrlParams Object
  *
  * 
  *
  * @property string $payment_order_uuid 
  *
  */
-class DeletePaymentOrderUrlParams extends SdkObject
+class PaymentResetUrlParams extends SdkObject
 {
 
     protected $subObjects = [

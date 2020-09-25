@@ -4,9 +4,9 @@ namespace Chainside\SDK\WebPos;
 
 use Psr\SimpleCache\CacheInterface;
 use Chainside\SDK\WebPos\Actions\Factory;
-use Chainside\SDK\WebPos\Objects\PaymentUpdateObject;
 use Chainside\SDK\WebPos\Objects\PaymentOrderCreation;
 use Chainside\SDK\WebPos\Objects\ClientCredentials;
+use Chainside\SDK\WebPos\Objects\PaymentUpdateObject;
 
 
 class Client
@@ -24,6 +24,103 @@ class Client
 
     }
 
+    
+    /**
+    * Endpoint to cancel a payment order
+    *
+    * @param string $paymentOrderUuid
+    *
+    * @return \Chainside\SDK\WebPos\Objects\PaymentOrderDeletionResponse
+    * @throws \SDK\Boilerplate\Exceptions\SdkException
+    */
+    public function deletePaymentOrder($paymentOrderUuid)
+    {
+
+        $action = $this->factory->make('delete_payment_order');
+
+        
+        $action->setPaymentOrderUuid($paymentOrderUuid);
+        return $action->run();
+    }
+    
+    /**
+    * Endpoint to retrieve a payment order
+    *
+    * @param string $paymentOrderUuid
+    *
+    * @return \Chainside\SDK\WebPos\Objects\PaymentOrderRetrieval
+    * @throws \SDK\Boilerplate\Exceptions\SdkException
+    */
+    public function getPaymentOrder($paymentOrderUuid)
+    {
+
+        $action = $this->factory->make('get_payment_order');
+
+        
+        $action->setPaymentOrderUuid($paymentOrderUuid);
+        return $action->run();
+    }
+    
+    /**
+    * Endpoint to retrieve all business' payment orders
+    *
+    * @param integer $page
+    * @param string $status
+    * @param string $sortBy
+    * @param integer $pageSize
+    * @param string $sortOrder
+    *
+    * @return \Chainside\SDK\WebPos\Objects\PaymentOrderList
+    * @throws \SDK\Boilerplate\Exceptions\SdkException
+    */
+    public function getPaymentOrders($page = null, $status = null, $sortBy = null, $pageSize = null, $sortOrder = null)
+    {
+
+        $action = $this->factory->make('get_payment_orders');
+
+        if(!is_null($page)) $action->setPage($page);
+        if(!is_null($status)) $action->setStatus($status);
+        if(!is_null($sortBy)) $action->setSortBy($sortBy);
+        if(!is_null($pageSize)) $action->setPageSize($pageSize);
+        if(!is_null($sortOrder)) $action->setSortOrder($sortOrder);
+        return $action->run();
+    }
+    
+    /**
+    * Endpoint to create a new payment order
+    *
+    * @param \Chainside\SDK\WebPos\Objects\PaymentOrderCreation $createPaymentOrder
+    *
+    * @return \Chainside\SDK\WebPos\Objects\PaymentOrderCreationResponse
+    * @throws \SDK\Boilerplate\Exceptions\SdkException
+    */
+    public function createPaymentOrder(PaymentOrderCreation $createPaymentOrder)
+    {
+
+        $action = $this->factory->make('create_payment_order');
+
+        
+        $action->setPaymentordercreation($createPaymentOrder);
+        return $action->run();
+    }
+    
+    /**
+    * Endpoint to sign in the system
+    *
+    * @param \Chainside\SDK\WebPos\Objects\ClientCredentials $clientCredentialsLogin
+    *
+    * @return \Chainside\SDK\WebPos\Objects\ClientCredentialsLoginResponse
+    * @throws \SDK\Boilerplate\Exceptions\SdkException
+    */
+    public function clientCredentialsLogin(ClientCredentials $clientCredentialsLogin)
+    {
+
+        $action = $this->factory->make('client_credentials_login');
+
+        
+        $action->setClientcredentials($clientCredentialsLogin);
+        return $action->run();
+    }
     
     /**
     * Endpoint to retrieve the possible sent callbacks based on legal payment's state transitions
@@ -79,103 +176,6 @@ class Client
         $action->setPaymentOrderUuid($paymentOrderUuid);
         
         $action->setPaymentupdateobject($paymentUpdate);
-        return $action->run();
-    }
-    
-    /**
-    * Endpoint to cancel a payment order
-    *
-    * @param string $paymentOrderUuid
-    *
-    * @return \Chainside\SDK\WebPos\Objects\PaymentOrderDeletionResponse
-    * @throws \SDK\Boilerplate\Exceptions\SdkException
-    */
-    public function deletePaymentOrder($paymentOrderUuid)
-    {
-
-        $action = $this->factory->make('delete_payment_order');
-
-        
-        $action->setPaymentOrderUuid($paymentOrderUuid);
-        return $action->run();
-    }
-    
-    /**
-    * Endpoint to retrieve a payment order
-    *
-    * @param string $paymentOrderUuid
-    *
-    * @return \Chainside\SDK\WebPos\Objects\PaymentOrderRetrieval
-    * @throws \SDK\Boilerplate\Exceptions\SdkException
-    */
-    public function getPaymentOrder($paymentOrderUuid)
-    {
-
-        $action = $this->factory->make('get_payment_order');
-
-        
-        $action->setPaymentOrderUuid($paymentOrderUuid);
-        return $action->run();
-    }
-    
-    /**
-    * Endpoint to retrieve all business' payment orders
-    *
-    * @param integer $pageSize
-    * @param integer $page
-    * @param string $sortOrder
-    * @param string $sortBy
-    * @param string $status
-    *
-    * @return \Chainside\SDK\WebPos\Objects\PaymentOrderList
-    * @throws \SDK\Boilerplate\Exceptions\SdkException
-    */
-    public function getPaymentOrders($pageSize = null, $page = null, $sortOrder = null, $sortBy = null, $status = null)
-    {
-
-        $action = $this->factory->make('get_payment_orders');
-
-        if(!is_null($pageSize)) $action->setPageSize($pageSize);
-        if(!is_null($page)) $action->setPage($page);
-        if(!is_null($sortOrder)) $action->setSortOrder($sortOrder);
-        if(!is_null($sortBy)) $action->setSortBy($sortBy);
-        if(!is_null($status)) $action->setStatus($status);
-        return $action->run();
-    }
-    
-    /**
-    * Endpoint to create a new payment order
-    *
-    * @param \Chainside\SDK\WebPos\Objects\PaymentOrderCreation $createPaymentOrder
-    *
-    * @return \Chainside\SDK\WebPos\Objects\PaymentOrderCreationResponse
-    * @throws \SDK\Boilerplate\Exceptions\SdkException
-    */
-    public function createPaymentOrder(PaymentOrderCreation $createPaymentOrder)
-    {
-
-        $action = $this->factory->make('create_payment_order');
-
-        
-        $action->setPaymentordercreation($createPaymentOrder);
-        return $action->run();
-    }
-    
-    /**
-    * Endpoint to sign in the system
-    *
-    * @param \Chainside\SDK\WebPos\Objects\ClientCredentials $clientCredentialsLogin
-    *
-    * @return \Chainside\SDK\WebPos\Objects\ClientCredentialsLoginResponse
-    * @throws \SDK\Boilerplate\Exceptions\SdkException
-    */
-    public function clientCredentialsLogin(ClientCredentials $clientCredentialsLogin)
-    {
-
-        $action = $this->factory->make('client_credentials_login');
-
-        
-        $action->setClientcredentials($clientCredentialsLogin);
         return $action->run();
     }
     

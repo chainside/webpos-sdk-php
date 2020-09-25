@@ -22,7 +22,7 @@ class CallbackList extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"callbacks": {"rules": ["required"], "elements": {"schema": {"name": {"type": "string", "rules": ["required"]}}, "type": "object", "rules": []}, "type": "array"}}, "type": "object", "rules": []}');
+        return Spec::fromJson('{"rules": [], "type": "object", "schema": {"callbacks": {"rules": ["required"], "type": "array", "elements": {"rules": [], "type": "object", "schema": {"name": {"rules": ["required"], "type": "string"}}}}}}');
     }
 
 }

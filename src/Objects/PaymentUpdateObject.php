@@ -21,7 +21,7 @@ class PaymentUpdateObject extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"callback": {"type": "string", "rules": ["required"]}}, "type": "object", "rules": []}');
+        return Spec::fromJson('{"rules": [], "type": "object", "schema": {"callback": {"rules": ["required"], "type": "string"}}}');
     }
 
 }

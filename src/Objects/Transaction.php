@@ -10,13 +10,13 @@ use ElevenLab\Validation\Spec;
  *
  * Bitcoin transaction paying a payment order
  *
- * @property \Illuminate\Support\Collection $outs Transaction's outputs
+ * @property string $blockchain_status Transaction's internal status
  * @property string $status Transaction's status
- * @property string $normalized_txid Transaction's normalized id
+ * @property string $created_at 
+ * @property \Illuminate\Support\Collection $outs Transaction's outputs
+ * @property string $normalized_txid Transaction's normalized id (DEPRECATED)
  * @property integer $outs_sum Paying amount of the transaction
  * @property string $txid Transaction's id
- * @property string $created_at 
- * @property string $blockchain_status Transaction's internal status
  *
  */
 class Transaction extends SdkObject
@@ -28,7 +28,7 @@ class Transaction extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"outs": {"rules": ["required"], "elements": {"schema": {"n": {"type": "integer", "rules": ["required"]}, "amount": {"type": "integer", "rules": ["required"]}}, "type": "object", "rules": []}, "type": "array"}, "status": {"type": "string", "rules": ["required", "in:unconfirmed,confirmed,reverted"]}, "normalized_txid": {"type": "string", "rules": ["len:64", "required"]}, "outs_sum": {"type": "integer", "rules": ["required"]}, "txid": {"type": "string", "rules": ["len:64", "required"]}, "created_at": {"type": "ISO_8601_date", "rules": ["required"]}, "blockchain_status": {"type": "string", "rules": ["required", "in:mempool,unconfirmed,confirmed,reverted"]}}, "type": "object", "rules": []}');
+        return Spec::fromJson('{"rules": [], "type": "object", "schema": {"blockchain_status": {"rules": ["required", "in:mempool,unconfirmed,confirmed,reverted"], "type": "string"}, "status": {"rules": ["required", "in:unconfirmed,confirmed,reverted"], "type": "string"}, "created_at": {"rules": ["required"], "type": "ISO_8601_date"}, "outs": {"rules": ["required"], "type": "array", "elements": {"rules": [], "type": "object", "schema": {"amount": {"rules": ["required"], "type": "integer"}, "n": {"rules": ["required"], "type": "integer"}}}}, "normalized_txid": {"rules": ["len:64", "required"], "type": "string"}, "outs_sum": {"rules": ["required"], "type": "integer"}, "txid": {"rules": ["len:64", "required"], "type": "string"}}}');
     }
 
 }

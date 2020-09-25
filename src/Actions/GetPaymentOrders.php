@@ -31,14 +31,6 @@ class GetPaymentOrders extends WebPosAuthenticatedAction
 
     /**
     *
-    * @param integer $pageSize
-    * @return $this
-    */
-    public function setPageSize($pageSize) {
-        $this->addQueryParameter('page_size', $pageSize);
-        return $this;
-    }/**
-    *
     * @param integer $page
     * @return $this
     */
@@ -47,11 +39,11 @@ class GetPaymentOrders extends WebPosAuthenticatedAction
         return $this;
     }/**
     *
-    * @param string $sortOrder
+    * @param string $status
     * @return $this
     */
-    public function setSortOrder($sortOrder) {
-        $this->addQueryParameter('sort_order', $sortOrder);
+    public function setStatus($status) {
+        $this->addQueryParameter('status', $status);
         return $this;
     }/**
     *
@@ -63,11 +55,19 @@ class GetPaymentOrders extends WebPosAuthenticatedAction
         return $this;
     }/**
     *
-    * @param string $status
+    * @param integer $pageSize
     * @return $this
     */
-    public function setStatus($status) {
-        $this->addQueryParameter('status', $status);
+    public function setPageSize($pageSize) {
+        $this->addQueryParameter('page_size', $pageSize);
+        return $this;
+    }/**
+    *
+    * @param string $sortOrder
+    * @return $this
+    */
+    public function setSortOrder($sortOrder) {
+        $this->addQueryParameter('sort_order', $sortOrder);
         return $this;
     }
 

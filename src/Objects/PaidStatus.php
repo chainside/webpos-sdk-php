@@ -22,7 +22,7 @@ class PaidStatus extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"schema": {"crypto": {"type": "integer", "rules": ["required"]}, "fiat": {"type": "string", "rules": ["required", "decimal"]}}, "type": "object", "rules": []}');
+        return Spec::fromJson('{"rules": [], "type": "object", "schema": {"crypto": {"rules": ["required"], "type": "integer"}, "fiat": {"rules": ["required", "decimal"], "type": "string"}}}');
     }
 
 }

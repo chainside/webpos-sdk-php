@@ -26,6 +26,7 @@ class Factory extends ActionFactory
     {
 
         return [
+            "client_credentials_login" => ClientCredentialsLogin::class,
             "get_callbacks" => GetCallbacks::class,
             "payment_reset" => PaymentReset::class,
             "payment_update" => PaymentUpdate::class,
@@ -33,7 +34,6 @@ class Factory extends ActionFactory
             "get_payment_order" => GetPaymentOrder::class,
             "get_payment_orders" => GetPaymentOrders::class,
             "create_payment_order" => CreatePaymentOrder::class,
-            "client_credentials_login" => ClientCredentialsLogin::class,
             
         ];
 

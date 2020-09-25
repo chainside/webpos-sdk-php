@@ -22,7 +22,7 @@ class ClientCredentials extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"type": "object", "rules": [], "schema": {"scope": {"type": "string", "rules": ["in:*", "required"]}, "grant_type": {"type": "string", "rules": ["equals:client_credentials", "required"]}}}');
+        return Spec::fromJson('{"rules": [], "type": "object", "schema": {"scope": {"rules": ["in:*", "required"], "type": "string"}, "grant_type": {"rules": ["equals:client_credentials", "required"], "type": "string"}}}');
     }
 
 }

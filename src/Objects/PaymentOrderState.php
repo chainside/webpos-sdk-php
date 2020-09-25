@@ -10,10 +10,10 @@ use ElevenLab\Validation\Spec;
  *
  * Data describing the current state of a payment order
  *
- * @property PaidStatus $in_confirmation Payment order's paid but unconfirmed amount
- * @property string $status Payment order's status
- * @property PaidStatus $paid Payment order's paid amount
  * @property string $blockchain_status Payment order's internal status
+ * @property PaidStatus $paid Payment order's paid amount
+ * @property string $status Payment order's status
+ * @property PaidStatus $in_confirmation Payment order's paid but unconfirmed amount
  * @property PaidStatus $unpaid Payment order's unpaid amount
  *
  */
@@ -28,7 +28,7 @@ class PaymentOrderState extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"type": "object", "rules": [], "schema": {"in_confirmation": {"type": "object", "rules": ["nullable", "required"], "schema": {"fiat": {"type": "string", "rules": ["required", "decimal"]}, "crypto": {"type": "integer", "rules": ["required"]}}}, "status": {"type": "string", "rules": ["in:pending,paid,cancelled,expired,network_dispute,chargeback", "required"]}, "paid": {"type": "object", "rules": ["nullable", "required"], "schema": {"fiat": {"type": "string", "rules": ["required", "decimal"]}, "crypto": {"type": "integer", "rules": ["required"]}}}, "blockchain_status": {"type": "string", "rules": ["in:pending,partial,mempool_unconfirmed,unconfirmed,paid,cancelled,expired,network_dispute,mempool_network_dispute,possible_chargeback,chargeback", "required"]}, "unpaid": {"type": "object", "rules": ["nullable", "required"], "schema": {"fiat": {"type": "string", "rules": ["required", "decimal"]}, "crypto": {"type": "integer", "rules": ["required"]}}}}}');
+        return Spec::fromJson('{"rules": [], "type": "object", "schema": {"blockchain_status": {"rules": ["in:pending,partial,mempool_unconfirmed,unconfirmed,paid,cancelled,expired,network_dispute,mempool_network_dispute,possible_chargeback,chargeback", "required"], "type": "string"}, "paid": {"rules": ["required", "nullable"], "type": "object", "schema": {"fiat": {"rules": ["required", "decimal"], "type": "string"}, "crypto": {"rules": ["required"], "type": "integer"}}}, "status": {"rules": ["in:pending,paid,cancelled,expired,network_dispute,chargeback", "required"], "type": "string"}, "in_confirmation": {"rules": ["required", "nullable"], "type": "object", "schema": {"fiat": {"rules": ["required", "decimal"], "type": "string"}, "crypto": {"rules": ["required"], "type": "integer"}}}, "unpaid": {"rules": ["required", "nullable"], "type": "object", "schema": {"fiat": {"rules": ["required", "decimal"], "type": "string"}, "crypto": {"rules": ["required"], "type": "integer"}}}}}');
     }
 
 }

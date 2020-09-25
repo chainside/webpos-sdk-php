@@ -169,17 +169,44 @@ methods to send requests:
 
 | Method |
 |--------|
+| `clientCredentialsLogin`(ClientCredentials $clientCredentialsLogin) : [ClientCredentialsLoginResponse](#ClientCredentialsLoginResponse)|
 | `getCallbacks`($paymentOrderUuid) : [CallbackList](#CallbackList)|
 | `paymentReset`($paymentOrderUuid) : [PaymentOrderRetrieval](#PaymentOrderRetrieval)|
 | `paymentUpdate`($paymentOrderUuid, PaymentUpdateObject $paymentUpdate) : [None](#None)|
 | `deletePaymentOrder`($paymentOrderUuid) : [PaymentOrderDeletionResponse](#PaymentOrderDeletionResponse)|
 | `getPaymentOrder`($paymentOrderUuid) : [PaymentOrderRetrieval](#PaymentOrderRetrieval)|
-| `getPaymentOrders`($status = null, $pageSize = null, $sortBy = null, $page = null, $sortOrder = null) : [PaymentOrderList](#PaymentOrderList)|
+| `getPaymentOrders`($sortBy = null, $page = null, $status = null, $sortOrder = null, $pageSize = null) : [PaymentOrderList](#PaymentOrderList)|
 | `createPaymentOrder`(PaymentOrderCreation $createPaymentOrder) : [PaymentOrderCreationResponse](#PaymentOrderCreationResponse)|
-| `clientCredentialsLogin`(ClientCredentials $clientCredentialsLogin) : [ClientCredentialsLoginResponse](#ClientCredentialsLoginResponse)|
 
 
 ## Objects
+
+### ClientCredentials
+
+Data required to perform a confidential client login
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| scope | _string_ | Yes | Oauth2 scope of the client's authorization |
+| grant_type | _string_ | Yes | Oauth2 Authorization's grant type |
+
+
+### ClientCredentialsLoginResponse
+
+Response data for a login performed by a confidential client.
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| expires_in | _integer_ | Yes | Token's expiration time |
+| id_token | _string_ | Yes | Jwt Token containing identity's informations |
+| scope | _string_ | No | Authorization's scope |
+| token_type | _string_ | Yes | Token's type |
+| access_token | _string_ | Yes | User's access token |
+
 
 ### CallbackList
 
@@ -211,69 +238,27 @@ Payment order retrieval data
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| uuid | _string_ | Yes | UUID of the payment order |
-| currency | _[CurrencyRetrieval](#currencyretrieval)_ | Yes | Fiat currency of the payment order |
-| amount | _string_ | Yes | Fiat's amount of the payment order |
-| expires_in | _integer_ | Yes |  Expiration time of the payment order |
-| callback_url | _string_ | Yes | The URL contacted to send callbacks related to payment status changes |
-| chargeback_date | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
-| reference | _string_ | Yes | Business' reference for the payment order |
-| dispute_start_date | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
-| address | _string_ | Yes | Bitcoin address of the payment order |
-| resolved_at | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
-| required_confirmations | _integer_ | Yes | Required confirmations for transactions paying the payment order |
-| details | _string_ | Yes | Payment order's details |
-| transactions | _\Illuminate\Support\Collection_ | Yes | Transactions paying the payment order |
 | created_by | _[PaymentOrderCreator](#paymentordercreator)_ | Yes | Data of the pos which created the payment order |
-| rate | _[RateRetrieval](#rateretrieval)_ | Yes | Crypto/Fiat rate of the payment order |
-| redirect_url | _string_ | Yes | URL where to redirect the user to perform the payment |
-| expiration_time | _string_ | Yes | Expiration date of the payment order |
-| state | _[PaymentOrderState](#paymentorderstate)_ | Yes | Current payment state of the payment order |
-| created_at | _string_ | Yes | Creation date of the payment order |
+| callback_url | _string_ | Yes | The URL contacted to send callbacks related to payment status changes |
+| dispute_start_date | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
 | uri | _string_ | Yes | Bitcoin uri |
+| currency | _[CurrencyRetrieval](#currencyretrieval)_ | Yes | Fiat currency of the payment order |
+| resolved_at | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
+| uuid | _string_ | Yes | UUID of the payment order |
+| state | _[PaymentOrderState](#paymentorderstate)_ | Yes | Current payment state of the payment order |
+| redirect_url | _string_ | Yes | URL where to redirect the user to perform the payment |
+| required_confirmations | _integer_ | Yes | Required confirmations for transactions paying the payment order |
+| expiration_time | _string_ | Yes | Expiration date of the payment order |
+| rate | _[RateRetrieval](#rateretrieval)_ | Yes | Crypto/Fiat rate of the payment order |
+| address | _string_ | Yes | Bitcoin address of the payment order |
+| amount | _string_ | Yes | Fiat's amount of the payment order |
 | btc_amount | _integer_ | Yes |  Bitcoin amount of the payment order |
-
-
-### CurrencyRetrieval
-
-Currency Data
-
-#### Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| name | _string_ | Yes | Name of the currency |
-| uuid | _string_ | Yes | UUID of the currency |
-| type | _string_ | Yes | Currency's type (fiat/crypto) |
-
-
-### Transaction
-
-Bitcoin transaction paying a payment order
-
-#### Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| status | _string_ | Yes | Transaction's status |
-| normalized_txid | _string_ | Yes | Transaction's normalized id |
-| txid | _string_ | Yes | Transaction's id |
-| blockchain_status | _string_ | Yes | Transaction's internal status |
-| created_at | _string_ | Yes |  |
-| outs | _\Illuminate\Support\Collection_ | Yes | Transaction's outputs |
-| outs_sum | _integer_ | Yes | Paying amount of the transaction |
-
-
-### Out
-
-Transaction's output
-
-#### Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| n | _integer_ | Yes | Transaction output's index |
-| amount | _integer_ | Yes | Output's amount |
+| created_at | _string_ | Yes | Creation date of the payment order |
+| expires_in | _integer_ | Yes |  Expiration time of the payment order |
+| transactions | _\Illuminate\Support\Collection_ | Yes | Transactions paying the payment order |
+| reference | _string_ | Yes | Business' reference for the payment order |
+| chargeback_date | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
+| details | _string_ | Yes | Payment order's details |
 
 
 ### PaymentOrderCreator
@@ -303,17 +288,17 @@ Deposit account lite object when sent nested in other api objects
 | type | _string_ | Yes | Deposit account's type |
 
 
-### RateRetrieval
+### CurrencyRetrieval
 
-Rate Data
+Currency Data
 
 #### Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| source | _string_ | Yes | Exchange providing the rate |
-| value | _string_ | Yes | Value of the rate |
-| created_at | _string_ | Yes | Creation's date of the rate |
+| name | _string_ | Yes | Name of the currency |
+| uuid | _string_ | Yes | UUID of the currency |
+| type | _string_ | Yes | Currency's type (fiat/crypto) |
 
 
 ### PaymentOrderState
@@ -324,10 +309,10 @@ Data describing the current state of a payment order
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| in_confirmation | _[PaidStatus](#paidstatus)_ | Yes | Payment order's paid but unconfirmed amount |
-| status | _string_ | Yes | Payment order's status |
-| paid | _[PaidStatus](#paidstatus)_ | Yes | Payment order's paid amount |
 | blockchain_status | _string_ | Yes | Payment order's internal status |
+| paid | _[PaidStatus](#paidstatus)_ | Yes | Payment order's paid amount |
+| status | _string_ | Yes | Payment order's status |
+| in_confirmation | _[PaidStatus](#paidstatus)_ | Yes | Payment order's paid but unconfirmed amount |
 | unpaid | _[PaidStatus](#paidstatus)_ | Yes | Payment order's unpaid amount |
 
 
@@ -341,6 +326,48 @@ Cryto and fiat paid amounts
 |-----------|------|----------|-------------|
 | fiat | _string_ | Yes | Fiat Amount |
 | crypto | _integer_ | Yes | Cryto Amount |
+
+
+### RateRetrieval
+
+Rate Data
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| created_at | _string_ | Yes | Creation's date of the rate |
+| source | _string_ | Yes | Exchange providing the rate |
+| value | _string_ | Yes | Value of the rate |
+
+
+### Transaction
+
+Bitcoin transaction paying a payment order
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| blockchain_status | _string_ | Yes | Transaction's internal status |
+| normalized_txid | _string_ | Yes | Transaction's normalized id |
+| outs_sum | _integer_ | Yes | Paying amount of the transaction |
+| outs | _\Illuminate\Support\Collection_ | Yes | Transaction's outputs |
+| status | _string_ | Yes | Transaction's status |
+| created_at | _string_ | Yes |  |
+| txid | _string_ | Yes | Transaction's id |
+
+
+### Out
+
+Transaction's output
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| amount | _integer_ | Yes | Output's amount |
+| n | _integer_ | Yes | Transaction output's index |
 
 
 ### PaymentUpdateObject
@@ -365,6 +392,49 @@ Payment order deletion response
 | cancel_url | _string_ | Yes | The URL where the user is redirected upon payment order expiration/cancellation |
 
 
+### PaymentData
+
+Data needed to perform the checkout
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| expires_in | _integer_ | Yes | Expiration seconds of the payment order |
+| expiration_time | _string_ | Yes | Expiration date of the payment order |
+| bitcoin | _[BitcoinPaymentData](#bitcoinpaymentdata)_ | No | Data for bitcoin payment checkout |
+| rate | _[RateRetrieval](#rateretrieval)_ | Yes | Payment order rate |
+| payment_method | _string_ | Yes | Bound payment method |
+| ln | _[LnPaymentData](#lnpaymentdata)_ | No | Data for lightning network payment checkout |
+| amount | _string_ | Yes | Amount related to the selected payment method (with rate conversion if any) |
+
+
+### BitcoinPaymentData
+
+Data needed to perform the checkout of a bitcoin-bound payment order
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| required_confirmations | _integer_ | Yes | Required confirmations for transactions paying the payment order |
+| uri | _string_ | Yes | Bitcoin Uri |
+| address | _string_ | Yes | Bitcoin address |
+| transactions | _\Illuminate\Support\Collection_ | Yes | Transactions paying the payment order |
+| state | _[PaymentOrderState](#paymentorderstate)_ | Yes | Current payment state of the payment order |
+
+
+### LnPaymentData
+
+Data needed to perform the checkout of a ln-bound payment order
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| invoice | _string_ | Yes | Ln bolt11 invoice |
+
+
 ### PaymentOrderList
 
 List of Business' payment orders
@@ -373,9 +443,9 @@ List of Business' payment orders
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| total_pages | _integer_ | Yes | Total number of pages given the requested page size |
-| paymentorders | _\Illuminate\Support\Collection_ | Yes | Business' payment orders |
 | total_items | _integer_ | Yes | Total number of items |
+| paymentorders | _\Illuminate\Support\Collection_ | Yes | Business' payment orders |
+| total_pages | _integer_ | Yes | Total number of pages given the requested page size |
 
 
 ### PaymentOrderCreation
@@ -386,13 +456,13 @@ Data required to create a new payment order
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| cancel_url | _string_ | No | The URL where the user is redirected upon successful payment order expiration/cancellation |
-| amount | _string_ | Yes | Payment order's fiat amount |
-| continue_url | _string_ | No | The URL where the user is redirected upon successful payment |
-| callback_url | _string_ | No | The URL contacted to send callbacks related to payment status changes |
 | required_confirmations | _integer_ | No | Required confirmations for transactions paying the payment order |
+| cancel_url | _string_ | No | The URL where the user is redirected upon successful payment order expiration/cancellation |
+| callback_url | _string_ | No | The URL contacted to send callbacks related to payment status changes |
 | reference | _string_ | No | Business' reference of the payment order |
+| continue_url | _string_ | No | The URL where the user is redirected upon successful payment |
 | details | _string_ | No | Payment order's details |
+| amount | _string_ | Yes | Payment order's fiat amount |
 
 
 ### PaymentOrderCreationResponse
@@ -404,42 +474,9 @@ Response data for a payment order creation request
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | uuid | _string_ | Yes | UUID of the payment order |
-| reference | _string_ | No | Payment Order reference |
-| amount | _integer_ | Yes | Crypto amount of the payment order |
-| expires_in | _integer_ | Yes | Expiration's time of the payment order |
-| uri | _string_ | Yes | Bitcoin uri according to BIP 21 (https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki) |
-| rate | _[RateRetrieval](#rateretrieval)_ | Yes | Crypto/Fiat rate of the payment order |
-| redirect_url | _string_ | Yes | URL where to redirect the user to perform the payment |
-| expiration_time | _string_ | Yes | Expiration's date of the payment order |
-| address | _string_ | Yes | Bitcoin address of the payment order |
 | created_at | _string_ | No | Creation date of the payment order |
-
-
-### ClientCredentials
-
-Data required to perform a confidential client login
-
-#### Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| scope | _string_ | Yes | Oauth2 scope of the client's authorization |
-| grant_type | _string_ | Yes | Oauth2 Authorization's grant type |
-
-
-### ClientCredentialsLoginResponse
-
-Response data for a login performed by a confidential client.
-
-#### Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| expires_in | _integer_ | Yes | Token's expiration time |
-| scope | _string_ | No | Authorization's scope |
-| token_type | _string_ | Yes | Token's type |
-| access_token | _string_ | Yes | User's access token |
-| id_token | _string_ | Yes | Jwt Token containing identity's informations |
+| redirect_url | _string_ | Yes | URL where to redirect the user to perform the payment |
+| reference | _string_ | No | Payment Order reference |
 
 
 ### CallbackPaymentOrder
@@ -451,28 +488,6 @@ Payment order retrieval data
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | uuid | _string_ | Yes | UUID of the payment order |
-| currency | _[CurrencyRetrieval](#currencyretrieval)_ | Yes | Fiat currency of the payment order |
-| amount | _string_ | Yes | Fiat's amount of the payment order |
-| expires_in | _integer_ | Yes |  Expiration time of the payment order |
-| callback_url | _string_ | Yes | The URL contacted to send callbacks related to payment status changes |
-| chargeback_date | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
-| reference | _string_ | Yes | Business' reference for the payment order |
-| dispute_start_date | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
-| address | _string_ | Yes | Bitcoin address of the payment order |
-| resolved_at | _string_ | Yes | Time at which either the payment order has been fully paid or is expired |
-| continue_url | _string_ | Yes | The URL where the user is redirected upon successful payment |
-| required_confirmations | _integer_ | Yes | Required confirmations for transactions paying the payment order |
-| details | _string_ | Yes | Payment order's details |
-| cancel_url | _string_ | Yes | The URL where the user is redirected upon payment order expiration/cancellation |
-| transactions | _\Illuminate\Support\Collection_ | Yes | Transactions paying the payment order |
-| created_by | _[PaymentOrderCreator](#paymentordercreator)_ | Yes | Data of the pos which created the payment order |
-| rate | _[RateRetrieval](#rateretrieval)_ | Yes | Crypto/Fiat rate of the payment order |
-| redirect_url | _string_ | Yes | URL where to redirect the user to perform the payment |
-| expiration_time | _string_ | Yes | Expiration date of the payment order |
-| state | _[PaymentOrderState](#paymentorderstate)_ | Yes | Current payment state of the payment order |
-| created_at | _string_ | Yes | Creation date of the payment order |
-| uri | _string_ | Yes | Bitcoin uri |
-| btc_amount | _integer_ | Yes |  Bitcoin amount of the payment order |
 
 
 
@@ -539,10 +554,10 @@ $receivedCallback = \ChainsideWebPosCallbackHandler::parseFromGlobals();
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| event | _string_ | Yes | Event which triggered the callback |
+| object_type | _string_ | Yes | Type of the object sent in the callback |
 | created_at | _string_ | Yes | Date in which the callback was sent |
 | object | [CallbackPaymentOrder](#callbackpaymentorder) | Yes |  |
-| object_type | _string_ | Yes | Type of the object sent in the callback |
+| event | _string_ | Yes | Event which triggered the callback |
 
 
 ### Triggered events

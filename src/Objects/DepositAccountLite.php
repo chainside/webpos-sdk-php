@@ -23,7 +23,7 @@ class DepositAccountLite extends SdkObject
 
     public static function schema()
     {
-        return Spec::fromJson('{"type": "object", "rules": [], "schema": {"name": {"type": "string", "rules": ["required"]}, "uuid": {"type": "uuid", "rules": ["required"]}, "type": {"type": "string", "rules": ["in:bank,bitcoin", "required"]}}}');
+        return Spec::fromJson('{"rules": [], "type": "object", "schema": {"name": {"rules": ["required"], "type": "string"}, "uuid": {"rules": ["required"], "type": "uuid"}, "type": {"rules": ["in:bank,bitcoin", "required"], "type": "string"}}}');
     }
 
 }

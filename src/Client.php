@@ -4,9 +4,9 @@ namespace Chainside\SDK\WebPos;
 
 use Psr\SimpleCache\CacheInterface;
 use Chainside\SDK\WebPos\Actions\Factory;
+use Chainside\SDK\WebPos\Objects\ClientCredentials;
 use Chainside\SDK\WebPos\Objects\PaymentUpdateObject;
 use Chainside\SDK\WebPos\Objects\PaymentOrderCreation;
-use Chainside\SDK\WebPos\Objects\ClientCredentials;
 
 
 class Client
@@ -24,6 +24,24 @@ class Client
 
     }
 
+    
+    /**
+    * Endpoint to sign in the system
+    *
+    * @param \Chainside\SDK\WebPos\Objects\ClientCredentials $clientCredentialsLogin
+    *
+    * @return \Chainside\SDK\WebPos\Objects\ClientCredentialsLoginResponse
+    * @throws \SDK\Boilerplate\Exceptions\SdkException
+    */
+    public function clientCredentialsLogin(ClientCredentials $clientCredentialsLogin)
+    {
+
+        $action = $this->factory->make('client_credentials_login');
+
+        
+        $action->setClientcredentials($clientCredentialsLogin);
+        return $action->run();
+    }
     
     /**
     * Endpoint to retrieve the possible sent callbacks based on legal payment's state transitions
@@ -121,25 +139,25 @@ class Client
     /**
     * Endpoint to retrieve all business' payment orders
     *
-    * @param string $status
-    * @param integer $pageSize
     * @param string $sortBy
     * @param integer $page
+    * @param string $status
     * @param string $sortOrder
+    * @param integer $pageSize
     *
     * @return \Chainside\SDK\WebPos\Objects\PaymentOrderList
     * @throws \SDK\Boilerplate\Exceptions\SdkException
     */
-    public function getPaymentOrders($status = null, $pageSize = null, $sortBy = null, $page = null, $sortOrder = null)
+    public function getPaymentOrders($sortBy = null, $page = null, $status = null, $sortOrder = null, $pageSize = null)
     {
 
         $action = $this->factory->make('get_payment_orders');
 
-        if(!is_null($status)) $action->setStatus($status);
-        if(!is_null($pageSize)) $action->setPageSize($pageSize);
         if(!is_null($sortBy)) $action->setSortBy($sortBy);
         if(!is_null($page)) $action->setPage($page);
+        if(!is_null($status)) $action->setStatus($status);
         if(!is_null($sortOrder)) $action->setSortOrder($sortOrder);
+        if(!is_null($pageSize)) $action->setPageSize($pageSize);
         return $action->run();
     }
     
@@ -158,24 +176,6 @@ class Client
 
         
         $action->setPaymentordercreation($createPaymentOrder);
-        return $action->run();
-    }
-    
-    /**
-    * Endpoint to sign in the system
-    *
-    * @param \Chainside\SDK\WebPos\Objects\ClientCredentials $clientCredentialsLogin
-    *
-    * @return \Chainside\SDK\WebPos\Objects\ClientCredentialsLoginResponse
-    * @throws \SDK\Boilerplate\Exceptions\SdkException
-    */
-    public function clientCredentialsLogin(ClientCredentials $clientCredentialsLogin)
-    {
-
-        $action = $this->factory->make('client_credentials_login');
-
-        
-        $action->setClientcredentials($clientCredentialsLogin);
         return $action->run();
     }
     

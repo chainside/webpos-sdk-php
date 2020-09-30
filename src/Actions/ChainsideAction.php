@@ -16,7 +16,7 @@ abstract class ChainsideAction extends Action
     protected $defaultHeaders = [
         'Content-Type' => 'application/json',
         'Accept' => 'application/json',
-        'X-Api-Version' => 'v1'
+        'X-Api-Version' => 'v2'
     ];
 
     /**
